@@ -18,8 +18,9 @@ namespace MoodAnalyseTest
         [Test]
         public void GivenMassage_When_ShouldReturnSad()
         {
+            moodAnalyser = new MoodAnalyser("I am in SAD Mood");
             //Act
-            string message = moodAnalyser.AnalyserMood("I am in SAD Mood");
+            string message = moodAnalyser.AnalyserMood();
             //Assert
             Assert.AreEqual("SAD", message);
         }
@@ -28,8 +29,19 @@ namespace MoodAnalyseTest
         [Test]
         public void GivenMassage_When_ShouldReturnHappy()
         {
+            moodAnalyser = new MoodAnalyser("I am in ANY Mood");
             //Act
-            string message = moodAnalyser.AnalyserMood("I am in Any Mood");
+            string message = moodAnalyser.AnalyserMood();
+            //Assert
+            Assert.AreEqual("HAPPY", message);
+        }
+        // TC-2.1 Given Null Mood Should Return Happy
+        [Test]
+        public void GivenMessage_WhenNull_ShouldReturnHappy()
+        {
+            moodAnalyser = new MoodAnalyser();
+            //Act
+            string message = moodAnalyser.AnalyserMood();
             //Assert
             Assert.AreEqual("HAPPY", message);
         }
