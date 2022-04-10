@@ -6,6 +6,7 @@ namespace MoodAnalyserSpace
     public class MoodAnalyser
     {
         private string _msg;
+        public string Mood { get; set; }
         public MoodAnalyser()
         {
 
