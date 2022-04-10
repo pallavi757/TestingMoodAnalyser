@@ -34,7 +34,7 @@ namespace MoodAnalyserSpace
             }
             catch (NullReferenceException)
             {
-                /// throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NULL_MESSAGE, "Mood should not be Null");
+                // throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NULL_MESSAGE, "Mood should not be Null");
                 return "HAPPY";
             }
         }
