@@ -8,7 +8,7 @@ namespace MoodAnalyseTest
     public class Tests
     {
         MoodAnalyser moodAnalyser;
-        MoodAnalyserFactory moodAnalyserfactory;
+       
 
         [SetUp]
         public void Setup()
@@ -16,7 +16,7 @@ namespace MoodAnalyseTest
             string result = " ";
             //Arrange
             moodAnalyser = new MoodAnalyser(result);
-            moodAnalyserfactory = new MoodAnalyserFactory();
+          
         }
         // <summary>
         // TC-1.1 Given "I am in Sad mood" message should return SAD
@@ -176,6 +176,30 @@ namespace MoodAnalyseTest
             catch (MoodAnalyserCustomException exception)
             {
                 Assert.AreEqual(expected, exception.Message);
+            }
+        }
+        // <summary>
+        // TC - 6.1 -Given Happy Message Using Reflection When Proper Should Return HAPPY Mood
+        // </summary>
+        [Test]
+        public void Give_HappyMessage_Using_Reflection_ReturnHappy()
+        {
+            string result = MoodAnalyserFactory.InvokeAnalyseMood("HAPPY", "AnalyserMood");
+            Assert.AreEqual("HAPPY", result);
+        }
+        // <summary>
+        //TC 6.2 - Given Happy Message When Improper Method Should Throw MoodAnalysisException
+        //</summary>
+        [Test]
+        public void GivenHappyWhenImproperThrowMoodAnalysisException()
+        {
+            try
+            {
+                string result = MoodAnalyserFactory.InvokeAnalyseMood("HAPPY","AnalyserMoods");
+            }
+            catch (MoodAnalyserCustomException exception)
+            {
+                Assert.AreEqual("Constructor not found", exception.Message);
             }
         }
 

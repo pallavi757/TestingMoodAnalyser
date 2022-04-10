@@ -5,25 +5,25 @@ namespace MoodAnalyserSpace
 {
     public class MoodAnalyser
     {
-        private string message;
+        private string _msg;
         public MoodAnalyser()
         {
 
         }
-        public MoodAnalyser(string message)
+        public MoodAnalyser(string message = "Null")
         {
-            this.message = message;
+            _msg = message;
         }
 
         public string AnalyserMood()
         {
             try
             {
-                if (this.message.Equals(string.Empty))
+                if (_msg.Equals(string.Empty))
                 {
                     throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.EMPTY_MESSAGE, "Mood should not be Empty");
                 }
-                if (this.message.Contains("SAD"))
+              else if (_msg.Contains("SAD"))
                 {
                     return "SAD";
                 }

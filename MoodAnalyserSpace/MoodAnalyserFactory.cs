@@ -5,11 +5,13 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using MoodAnalyserSpace;
 
 namespace MoodAnalyserSpace
 {
     public class MoodAnalyserFactory
     {
+        public string mood;
         public static object CreateMoodAnalyse(string className, string constructorName)
         {
             string pattern = @"." + constructorName + "$";
@@ -54,7 +56,22 @@ namespace MoodAnalyserSpace
 
             }
         }
-
+        public static string InvokeAnalyseMood(string message, string methodName)
+        {
+            try
+            {
+                Type type = Type.GetType("MoodAnalyserSpace.MoodAnalyser");//ClassName
+                object moodAnalyse = CreateMoodAnalyserWithParameterisedConstructor(
+                    "MoodAnalyserSpace.MoodAnalyser", "MoodAnalyser");//namespace with class name
+                MethodInfo methodInfo = type.GetMethod(methodName);//Methodname
+                object moodInvoke = methodInfo.Invoke(moodAnalyse, null); // Namespace.classname.methodname
+                return (string)moodInvoke;
+            }
+            catch (Exception)
+            {
+                throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NO_SUCH_CONSTRUCTOR, "Constructor not found");
+            }
+        }
 
     }
 }
